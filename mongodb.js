@@ -1,7 +1,14 @@
 //CRUD create read update delete
 
-const mongodb = require('mongodb')   //we installed mongodb library. allows connect to mongo database from node.js
-const MongoClient = mongodb.MongoClient
+// const mongodb = require('mongodb')   //we installed mongodb library. allows connect to mongo database from node.js
+// const MongoClient = mongodb.MongoClient
+// const ObjectID = mongodb.ObjectId
+//below is same thing but with destructuring
+const { MongoClient, ObjectId } = require('mongodb')
+
+const id = new ObjectId()
+console.log(id.id.length)
+console.log(id.toHexString().length)
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
@@ -14,8 +21,9 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     const db = client.db(databaseName)
 
     // db.collection('users').insertOne({
-    //     name: "Slim",
-    //     age: 46
+    //     _id: id,
+    //     name: "Vikram",
+    //     age: 105
     // }, (error, result) => {
     //     if(error){
     //         return console.log('Unable to insert user')
@@ -41,22 +49,22 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     //     return console.log(result.insertedIds)
     // })
 
-    db.collection('tasks').insertMany([
-        {
-            task: 'Sleep',
-            completed: false
-        },{
-            task: 'Eat',
-            completed: true
-        },{
-            task: 'Clean the cat.',
-            completed: false
-        }
-    ], (error, result) => {
-        if(error){
-            return console.log(error)
-        }
+    // db.collection('tasks').insertMany([
+    //     {
+    //         task: 'Sleep',
+    //         completed: false
+    //     },{
+    //         task: 'Eat',
+    //         completed: true
+    //     },{
+    //         task: 'Clean the cat.',
+    //         completed: false
+    //     }
+    // ], (error, result) => {
+    //     if(error){
+    //         return console.log(error)
+    //     }
 
-        return console.log(result.insertedIds)
-    })
+    //     return console.log(result.insertedIds)
+    // })
 })
