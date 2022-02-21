@@ -8,6 +8,8 @@ const { MongoClient, ObjectId } = require('mongodb')
 
 const id = new ObjectId()
 console.log(id.id.length)
+// console.log(id.getTimestamp())
+
 console.log(id.toHexString().length)
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
@@ -19,52 +21,28 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     }
 
     const db = client.db(databaseName)
-
-    // db.collection('users').insertOne({
-    //     _id: id,
-    //     name: "Vikram",
-    //     age: 105
-    // }, (error, result) => {
-    //     if(error){
-    //         return console.log('Unable to insert user')
+    
+    // db.collection('users').updateOne({
+    //     _id: new ObjectId("62016c5e93206e8d194cff70")
+    // }, {
+    //     $inc: {
+    //         age: 100
     //     }
-
-    //     console.log(result.insertedId)
+    // }).then((result) => {
+    //     console.log(result)
+    // }).catch((error) => {
+    //     console.log(error)
     // })
 
-    // db.collection('users').insertMany([
-    //     {
-    //         name: 'Johnny',
-    //         age: 33
-    //     },
-    //     {
-    //         name: 'Samantha',
-    //         age: 22
-    //     }
-    // ], (error, result) => {
-    //     if(error){
-    //         return console.log('Unable to insert docuents')
-    //     }
-
-    //     return console.log(result.insertedIds)
-    // })
-
-    // db.collection('tasks').insertMany([
-    //     {
-    //         task: 'Sleep',
-    //         completed: false
-    //     },{
-    //         task: 'Eat',
-    //         completed: true
-    //     },{
-    //         task: 'Clean the cat.',
-    //         completed: false
-    //     }
-    // ], (error, result) => {
-    //     if(error){
-    //         return console.log(error)
-    //     }
-
-    //     return console.log(result.insertedIds)
-    // })
+    db.collection('tasks').updateMany({
+        completed: false
+    }, {
+        $set: {
+            completed: true
+        }
+    }).then((result) => {
+        console.log(result)
+    }).catch((error) => {
+        console.log(error)
+    })
 })
