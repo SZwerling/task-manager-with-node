@@ -10,6 +10,17 @@ const User = mongoose.model('User', {
         required: true,
         trim: true
     },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 7,
+        validate(value){
+            if(value.toLowerCase().includes('password')){
+                throw new Error('Password cannot contain the word "password."')
+            }
+        }
+    },
     email: {
         type: String,
         required: true,
@@ -35,30 +46,36 @@ const User = mongoose.model('User', {
 const Task = mongoose.model('Task', {
     task: {
         type: String,
+        required: true,
+        trim: true
     },
     completed: {
-        type: Boolean
+        type: Boolean,
+        required: false,
+        default: false
     }
 })
 
-// const thing = new Task({
-//     task: "Sleep",
-//     completed: true
-// })
+const thing = new Task({
+    task: "Sleep",
+    completed: true
 
-// thing.save().then(() => {
-//     console.log(thing)
-// }).catch((error) => {
-//     console.log('Error: ', error)
-// })
-
-const me = new User({
-    name: '  Tom ',
-    email: 'someTHTHTingwrong@gmail.com  '
 })
 
-me.save().then(() => {
-    console.log(me)
+thing.save().then(() => {
+    console.log(thing)
 }).catch((error) => {
-    console.log("error: ", error)
+    console.log('Error: ', error)
 })
+
+// const me = new User({
+//     name: '  Tom ',
+//     email: 'someTHTHTingwrong@gmail.com  ',
+//     password: 'zwerling123'
+// })
+
+// me.save().then(() => {
+//     console.log(me)
+// }).catch((error) => {
+//     console.log("error: ", error)
+// })
