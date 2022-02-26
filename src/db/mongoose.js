@@ -1,3 +1,6 @@
+//get ready for rest api
+//REpresentational State Transfer
+//Application Programming Interface
 const mongoose = require('mongoose');
 const validator = require('validator')
 
