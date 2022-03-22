@@ -50,10 +50,10 @@ const userSchema = mongoose.Schema({
    }]
 });
 
-userSchema.virtual('tasks', {
+userSchema.virtual('tasks', {  //virtual, not in database, is relational between two entities
    ref: 'Task',
    localField: '_id',
-   foreignField: 'owner'
+   foreignField: 'owner'  //property name from other model
 })
 
 userSchema.methods.toJSON = function() {
