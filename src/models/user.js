@@ -49,6 +49,8 @@ const userSchema = mongoose.Schema({
          required: true
       }
    }]
+}, {
+   timestamps: true
 });
 
 userSchema.virtual('tasks', {  //virtual, not in database, is relational between two entities
