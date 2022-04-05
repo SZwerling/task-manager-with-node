@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+
 const userSchema = mongoose.Schema({
    name: {
       type: String,
@@ -67,6 +68,7 @@ userSchema.methods.toJSON = function() {
    const userObject = user.toObject()
    delete userObject.password
    delete userObject.tokens
+   delete userObject.avatar
 
    return userObject
 }
